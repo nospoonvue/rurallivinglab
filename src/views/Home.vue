@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 							<!-- Banner -->
-								<section id="banner">
+								<section id="banner" class="banner">
 									<div class="content">
 										<header>
 											<h1>Hi, I’m Frank</h1>

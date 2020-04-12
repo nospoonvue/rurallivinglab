@@ -22,8 +22,8 @@
 
 <script>
 import axios from 'axios';
-import BlogListing from '@/components/BlogListing.vue'
-//AKfycbycd1UTMGwmjzS3oUcsKyQ0Kc273H_w4T8PmeRXPMwhjEVsU
+//import BlogListing from '@/components/BlogListing.vue'
+
 const baseUrl = `https://script.google.com/macros/s/AKfycbxdxAaP33kUP1kO0J4TOHKdz6FMoiIVPCqQvrGaoNfrWbAeJiY/exec`;
 
 async function getData(viewStatus)
@@ -33,7 +33,7 @@ async function getData(viewStatus)
             {
                  viewStatus.info = response.data.records;
                  viewStatus.status = "done";
-                 alert(response.data.records[0].fields);
+                // alert(response.data.records[0].fields);
 
             }).catch
             (

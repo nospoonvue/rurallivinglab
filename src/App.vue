@@ -1,19 +1,14 @@
+
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About what?</router-link>
-    </div>
-
-		<!-- Wrapper -->
-			<div id="wrapper">
-
+     <div id="app">
+      <div id="wrapper">
 				<!-- Main -->
-				<div id="main">
+					<div id="main">
 						<div class="inner">
-							  <!-- Header -->
+
+							<!-- Header -->
 								<header id="header">
-									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+									<a href="index.html" class="logo"><strong>Purposeful Learning Labs</strong> by Frank Kroondijk</a>
 									<ul class="icons">
 										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -23,12 +18,15 @@
 									</ul>
 								</header>
 
-		
               <router-view/>
+
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved by Frank. Design: Frank.</p>
+								</footer>
 						</div>
 					</div>
 
-          				<!-- Sidebar -->
+				<!-- Sidebar -->
 					<div id="sidebar">
 						<div class="inner">
 
@@ -40,11 +38,18 @@
 								</section>
 
 							<!-- Menu -->
+              <div id="nav">
 								<nav id="menu">
 									<header class="major">
 										<h2>Menu</h2>
 									</header>
 									<ul>
+                        
+                    <li><router-link to="/">Home</router-link></li>
+                    <li><router-link to="/about">About</router-link></li>
+                    <li><router-link to="/projects" >Projects  </router-link></li>
+      				<li><router-link to="/blog" >Blog  </router-link></li>
+    
 										<li><a href="index.html">Homepage</a></li>
 										<li><a href="generic.html">Generic</a></li>
 										<li><a href="elements.html">Elements</a></li>
@@ -73,7 +78,7 @@
 										<li><a href="#">Amet Lacinia</a></li>
 									</ul>
 								</nav>
-
+                </div>
 							<!-- Section -->
 								<section>
 									<header class="major">
@@ -111,44 +116,37 @@
 										Nashville, TN 00000-0000</li>
 									</ul>
 								</section>
-</div>
+
 							<!-- Footer -->
 								<footer id="footer">
 									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 								</footer>
 
 						</div>
+            							<!-- Footer -->
+
 					</div>
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-								</footer>
-						</div>
-			
-
-
+    </div>
+    </div>
 </template>
 
+<script>
+//import something from "./assets/js/something.js"
+//import "./assets/js/jquery.min.js"
+import sideBar from "./assets/js/main.js"
+export default {
+  mounted() {
+    
+  //  alert('hier');
+    sideBar();
+  },
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+   methods: {
+      sideBar
+      
+   }
 }
 
-#nav {
-  padding: 30px;
-}
+</script>
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>

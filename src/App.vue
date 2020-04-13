@@ -20,8 +20,8 @@
 
               <router-view/>
 
-								<footer id="footer">
-									<p class="copyright">&copy; Untitled. All rights reserved by Frank. Design: Frank.</p>
+								<footer id="footer" style="text-align:center">
+									<p class="copyright">&copy; Purposeful learning labs. All rights reserved.</p>
 								</footer>
 						</div>
 					</div>
@@ -119,7 +119,7 @@
 
 							<!-- Footer -->
 								<footer id="footer">
-									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+									<p class="copyright">&copy; Purposeful learning labs. All rights reserved.</p>
 								</footer>
 
 						</div>
@@ -137,7 +137,7 @@ import sideBar from "./assets/js/main.js"
 export default {
   mounted() {
     
-  //  alert('hier');
+    //alert('hier');
     sideBar();
   },
 

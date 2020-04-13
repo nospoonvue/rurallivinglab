@@ -25,6 +25,7 @@ function sideBar()
 		});
 
 	// Hack: Workaround for Chrome/Android scrollbar position bug.
+	var $head = $('head');
 		if (browser.os == 'android'
 		&&	browser.name == 'chrome')
 			$('<style>#sidebar .inner::-webkit-scrollbar { display: none; }</style>')

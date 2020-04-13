@@ -1,8 +1,7 @@
 <template>
  <div id="blog">
-
-              <div id="statuslog" class="Absolute-Center"><img id="statusimage" v-bind:src="status" /> </div>
-
+    
+    <Status v-bind:class="statuscss" v-bind:img="status"/>
 
     <section id="banner" class="banner" v-for="item in info" :key="item.fields.Title">
         <div class="content" >
@@ -17,47 +16,59 @@
             </ul>
         </div>
         <span class="image object">
-            <img v-bind:src="item.fields.Photos[0].url" alt="" />
+            <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="item.fields.Title" />
         </span>
+    </section>
+    <section class="banner">
+    <div id="pages" style="text-align:center">
+        <p><button  :disabled='backDisabled' v-on:click="backward">previous page</button> | <button  :disabled='forwardDisabled' v-on:click="forward">next page</button></p>
+    </div>
     </section>
 </div>
 </template>
 
 
 <style >
-.Absolute-Center {
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  width: 256px;
-  height: 256px;
- 
-  
-}
+
 </style>
 
 <script>
 import axios from 'axios';
-import BlogListing from '@/components/BlogListing.vue'
+import Status from '@/components/Status.vue'
 
-const baseUrl = `https://script.google.com/macros/s/AKfycbxdxAaP33kUP1kO0J4TOHKdz6FMoiIVPCqQvrGaoNfrWbAeJiY/exec`;
+var baseUrl = `https://script.google.com/macros/s/AKfycbxdxAaP33kUP1kO0J4TOHKdz6FMoiIVPCqQvrGaoNfrWbAeJiY/exec`;
+
 
 async function getData(viewStatus)
 {
-    viewStatus.status = "./images/loading.gif";
-     await axios.get (baseUrl, {})
+
+    viewStatus.statuscss = "StatusShow";
+
+    //baseUrl += '?pageSize=' + viewStatus.pageSize;
+    //baseUrl += '&offset=' + viewStatus.offset;
+    //alert(baseUrl);
+    await axios.get (baseUrl + '?table=' +viewStatus.table + '&pageSize=' + viewStatus.pageSize + '&offset=' + viewStatus.offset, {})
             .then(response => 
             {
-                 viewStatus.info = response.data.records;
-                 viewStatus.status = "";
-                // alert(response.data.records[0].fields);
+                viewStatus.info = response.data.records;
+                viewStatus.statuscss = "StatusHidden";
+                if(response.data.offset)
+                {
+                    viewStatus.offset = response.data.offset;
+                   // alert(response.data.offset);
+                }
+                else
+                {
+                    viewStatus.offset = "";
+                    
+                }
 
             }).catch
             (
                 function (error) 
                 {
                     console.log(error)
-                    viewStatus.status = error;
+                    //viewStatus.status = error;
                 }
             )
 }
@@ -65,18 +76,53 @@ async function getData(viewStatus)
 export default 
 {
     name: "projects",
-    components: {BlogListing},
+    components: {Status},
 
     data() 
     {
     return {
         info: null,
-        status: ""
+        statuscss: "StatusHidden",
+        status: "",
+        offset: "",
+        offsetHistoryCursor: 0,
+        pageSize: 10,
+        offsetHistory: [],  
+        table: "Blog"
         }
     },
+    methods:
+    {
+        forward: function() 
+        {
+            this.offsetHistoryCursor++;
+            this.offsetHistory[this.offsetHistoryCursor] = this.offset;
+            getData(this);
+           
+        },
+        backward: function()
+        {
+            this.offsetHistoryCursor--;
+            if(this.offsetHistoryCursor < 0) this.offsetHistoryCursor =0;
+            this.offset = this.offsetHistory[this.offsetHistoryCursor];
+            getData(this);
+        }
+    },
+    computed: {
+  	    backDisabled: function(){
+              if(this.offsetHistoryCursor == 0)
+                return true;
+                else
+    	        return false;
+        },
+        forwardDisabled: function(){
+           // if(this.offset)
+    	    return  (this.offsetHistoryCursor >0 || this.offsetHistoryCursor ==0) && this.offset == "";
+        }  
+  },
     created() 
     {
-        this.status = "loading...";
+        this.offsetHistory[0]="";
         getData(this);
     },
 }

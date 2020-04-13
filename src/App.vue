@@ -21,7 +21,7 @@
               <router-view/>
 
 								<footer id="footer" style="text-align:center">
-									<p class="copyright">&copy; Purposeful learning labs. All rights reserved.</p>
+									<p class="copyright">&copy; Purposeful learning labs.</p>
 								</footer>
 						</div>
 					</div>

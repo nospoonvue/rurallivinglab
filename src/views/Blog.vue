@@ -47,7 +47,7 @@ async function getData(viewStatus)
     //baseUrl += '?pageSize=' + viewStatus.pageSize;
     //baseUrl += '&offset=' + viewStatus.offset;
     //alert(baseUrl);
-    await axios.get (baseUrl + '?table=' +viewStatus.table + '&pageSize=' + viewStatus.pageSize + '&offset=' + viewStatus.offset, {})
+    await axios.post (baseUrl + '?table=' +viewStatus.table + '&pageSize=' + viewStatus.pageSize + '&offset=' + viewStatus.offset, {})
             .then(response => 
             {
                 viewStatus.info = response.data.records;

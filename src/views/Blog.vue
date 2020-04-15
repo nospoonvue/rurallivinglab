@@ -43,13 +43,27 @@ async function getData(viewStatus)
 {
 
     viewStatus.statuscss = "StatusShow";
+// 'Content-Type': 'application/x-www-form-urlencoded'
+   const config = 
+   {
+    headers: 
+    {
+       
+    
+    }
+}
 
-    //baseUrl += '?pageSize=' + viewStatus.pageSize;
-    //baseUrl += '&offset=' + viewStatus.offset;
-    //alert(baseUrl);
-    await axios.post (baseUrl + '?table=' +viewStatus.table + '&pageSize=' + viewStatus.pageSize + '&offset=' + viewStatus.offset, {})
+const formData = new FormData();
+formData.append('action', 'read');
+formData.append('table', viewStatus.table);
+formData.append('pageSize', viewStatus.pageSize);
+formData.append('offset', viewStatus.offset);
+
+//+ '&pageSize=' + viewStatus.pageSize
+    await axios.post (baseUrl, formData, config)
             .then(response => 
             {
+                //alert('hi');
                 viewStatus.info = response.data.records;
                 viewStatus.statuscss = "StatusHidden";
                 if(response.data.offset)
@@ -71,6 +85,7 @@ async function getData(viewStatus)
                     //viewStatus.status = error;
                 }
             )
+            
 }
 
 export default 
@@ -86,7 +101,7 @@ export default
         status: "",
         offset: "",
         offsetHistoryCursor: 0,
-        pageSize: 10,
+        pageSize: 2,
         offsetHistory: [],  
         table: "Blog"
         }

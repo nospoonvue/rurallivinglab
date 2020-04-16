@@ -54,10 +54,10 @@ async function getData(viewStatus)
 }
 
 const formData = new FormData();
-formData.append('action', 'read');
 formData.append('table', viewStatus.table);
 formData.append('pageSize', viewStatus.pageSize);
 formData.append('offset', viewStatus.offset);
+formData.append('action', 'view');
 
 //+ '&pageSize=' + viewStatus.pageSize
     await axios.post (baseUrl, formData, config)

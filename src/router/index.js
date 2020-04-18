@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Projects from '../views/Projects.vue'
 import Blog from '../views/Blog.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ Vue.use(VueRouter)
   path: '/blog',
   name: 'Blog',
   component: Blog
+  },
+  {
+  path: '/login',
+  name: 'Login',
+  component: Login
   }
 
 ]

@@ -14,7 +14,9 @@
 										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
 										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>		
+                   						<li><nav id="nav"><router-link to="/login"><div id="un">{{loginLabel}}</div></router-link></nav></li>
+
 									</ul>
 								</header>
 
@@ -134,17 +136,40 @@
 //import something from "./assets/js/something.js"
 //import "./assets/js/jquery.min.js"
 import sideBar from "./assets/js/main.js"
+//import AccountInfo from "@/components/AccountInfo.vue";
+
 export default {
+	 data() {
+		 return {
+			 loginLabel:'Login'
+		 }
+   	}
+ ,
+ methods: {
+
+},
   mounted() {
     
     //alert('hier');
     sideBar();
   },
+ components: {
+   //AccountInfo
+ },
 
    methods: {
       sideBar
       
-   }
+   },
+   created() 
+    {
+	//	alert('begin:'+this.$user.Name);
+        if(this.$user.Name)
+        {
+			this.loginLabel = this.$user.Name;
+        }
+		
+    }
 }
 
 </script>

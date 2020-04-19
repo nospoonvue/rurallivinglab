@@ -82,7 +82,7 @@ async function getData(viewStatus,action)
     await axios.post (viewStatus.$baseUrl, formData, config)
             .then(response => 
             {
-                alert(baseUrl);
+                //alert(baseUrl);
                 alert('response:'+JSON.stringify(response))
                 if(action == 'delete')
                 {

@@ -4,10 +4,15 @@
 
         <div class="content" v-if="user && user.Token && !signUp">
             <h1>Profile</h1>
-            <p><input type="text" name="loggedInName" id="loggedInName" value="" placeholder="Name" v-model="user.Username"></p>
-            <p><input type="text" name="loggedInName" id="loggedInName" value="" placeholder="First name" v-model="user.Name"></p>
+            <p><input type="text" disabled name="loggedInName" id="loggedInName" value="" placeholder="Name" autocomplete="off" v-model="user.Username"></p>
+            <p><input type="text" name="loggedInName" id="loggedInName" value="" placeholder="First name" autocomplete="off"  v-model="user.Name"></p>
             <p><input type="text" name="loggedInLastName" id="loggedInLastName" value="" placeholder="Last name" v-model="user.LastName"></p>
-            <p><input type="Logout" value="Log out" class="button big" v-on:click="logOut()"></p>
+            <p><input type="email" name="Email" id="emailProfile" value="" placeholder="E-mail" v-model="user.Email"></p>
+            <ul class="actions">
+                <li><a href="#" class="button primary" v-on:click="updateProfile()">Update</a></li>
+                <li><a href="#" class="button" v-on:click="logOut()">Log out</a></li>
+                <li><a href="#" class="button" v-on:click="deleteProfile()">Delete profile</a></li>
+            </ul>
         </div>
 
         <div class="content" v-if="!user || !user.Token && !signUp">
@@ -75,27 +80,44 @@ async function getData(viewStatus,action)
     formData.append('action', action);
     formData.append('data', JSON.stringify(viewStatus.user));
 
-    //alert(JSON.stringify(JSON.stringify(viewStatus.user)));
+    alert("action:"+action+":userin:"+JSON.stringify(viewStatus.user));
 
     await axios.post (baseUrl, formData, config)
             .then(response => 
             {
-                //alert(baseUrl);
-                viewStatus.data = response.data.records;
-                viewStatus.statuscss = "StatusHidden";
-                //alert('response:'+JSON.stringify(response));
- 
-                if(viewStatus.data && viewStatus.data.length>0)
+                alert(baseUrl);
+                alert('response:'+JSON.stringify(response))
+                if(action == 'delete')
                 {
-                    //update local and global scope
-                    viewStatus.user = viewStatus.data[0].fields;
-                    viewStatus.$user = viewStatus.user;
-                   
+                    return;
+                }
+                //multiple record return
+                var userFound = false;
+                if(action == "login" && response.data.records[0])
+                {
+                    viewStatus.user = response.data.records[0].fields;
+                    userFound = true;
+                }
+
+                //single record return
+                if((action == "create" || action == "update") && response.data.fields)
+                {
+                    viewStatus.user = response.data.fields;  
+                    userFound = true;
+                } 
+
+                viewStatus.statuscss = "StatusHidden";
+                //alert('user:'+JSON.stringify(viewStatus.user));
+               // alert(viewStatus.data.length)
+
+                if(userFound)
+                {
                     //store in browser
                     sessionStorage.user = JSON.stringify(viewStatus.user)
                     localStorage.user = JSON.stringify(viewStatus.user)
                     //update login/profile label
                     document.getElementById('un').innerHTML = viewStatus.user.Name;
+                    viewStatus.signUp = false;
                 }
                 else
                 {
@@ -134,43 +156,62 @@ export default
         getLogin: function()
         {
             //alert('getlogin');
+    
             getData(this, 'login');
         },
         logOut: function()
         {
-            this.user = {};
-            this.$user = {};
-            sessionStorage.user = {};
-            localStorage.user = {};
+            this.clearUser();
             document.getElementById('un').innerHTML = "Log in";
         },
         applyForAccount: function()
         {
+            //clearUser();
             this.signUp = true;
-            
         },
         getAccount: function()
         {
+            
             getData(this, 'create');
+        },
+        clearUser: function()
+        {
+            this.user = {};
+            localStorage.clear();
+            sessionStorage.clear();
+
+        },
+        updateProfile: function()
+        {
+            getData(this, 'update');
+        },
+        deleteProfile: function()
+        {
+            getData(this, 'delete');
+            this.clearUser();
         }
     },
     computed: {
 
   },
+  mounted()
+  {
+     
+  },
   
     created() 
     {
-        //alert("global user:"+ this.$user);
-        if(this.$user)
+     
+     	if(localStorage.user)
         {
-            this.user = this.$user;
-            document.getElementById('un').innerHTML = this.user.Name;
+            this.user = JSON.parse(localStorage.user);
+
+            if(this.user.Name)
+            {
+                document.getElementById('un').innerHTML = this.user.Name;
+            }
         }
-        else
-        {
-            //alert('leeg in login');
-            this.user = {};
-        }
+  
     }
 }
 

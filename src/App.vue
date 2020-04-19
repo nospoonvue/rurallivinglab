@@ -141,6 +141,7 @@ import sideBar from "./assets/js/main.js"
 export default {
 	 data() {
 		 return {
+			 user: {},
 			 loginLabel:'Login'
 		 }
    	}
@@ -151,7 +152,8 @@ export default {
   mounted() {
     
     //alert('hier');
-    sideBar();
+	sideBar();
+
   },
  components: {
    //AccountInfo
@@ -163,11 +165,16 @@ export default {
    },
    created() 
     {
-	//	alert('begin:'+this.$user.Name);
-        if(this.$user.Name)
-        {
-			this.loginLabel = this.$user.Name;
-        }
+		
+	if(localStorage.user)
+    {
+	  this.user = JSON.parse(localStorage.user);
+
+	  if(this.user.Name)
+	  {
+		  this.loginLabel = this.user.Name;
+	  }
+    }
 		
     }
 }

@@ -7,7 +7,8 @@ import store from './store'
 
 
 Vue.config.productionTip = false
-Vue.prototype.$user = {}
+Vue.prototype.$baseUrl = "https://script.google.com/macros/s/AKfycbxdxAaP33kUP1kO0J4TOHKdz6FMoiIVPCqQvrGaoNfrWbAeJiY/exec"
+
 
 
 new Vue({
@@ -16,6 +17,12 @@ new Vue({
   render: h => h(App),
   created()
   {
-    if(localStorage.user && localStorage.user.Name) this.$user = JSON.parse(localStorage.user);
+
+
+ 
+  },
+  mounted()
+  {
+
   }
 }).$mount('#app')

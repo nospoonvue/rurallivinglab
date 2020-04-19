@@ -52,12 +52,16 @@ async function getData(viewStatus)
     
     }
 }
+var settings = {
+    'table': viewStatus.table,
+    'pageSize': viewStatus.pageSize,
+    'offset': viewStatus.offset
+}
 
 const formData = new FormData();
-formData.append('table', viewStatus.table);
-formData.append('pageSize', viewStatus.pageSize);
-formData.append('offset', viewStatus.offset);
+formData.append('data', JSON.stringify(settings));
 formData.append('action', 'view');
+
 
 //+ '&pageSize=' + viewStatus.pageSize
     await axios.post (baseUrl, formData, config)

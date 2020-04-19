@@ -2157,7 +2157,7 @@ button,
       flex-direction: column-reverse; }
       #banner h1 br {
         display: none; }
-      #banner h1 { margin-top: -16em; }
+      #banner h1 { margin-top: -2em; }
       #banner .content {
         -moz-flex-grow: 0;
         -webkit-flex-grow: 0;

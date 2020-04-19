@@ -49,9 +49,10 @@
                         
                     <li><router-link to="/">Home</router-link></li>
                     <li><router-link to="/about">About</router-link></li>
-                    <li><router-link to="/projects" >Projects  </router-link></li>
-      				<li><router-link to="/blog" >Blog  </router-link></li>
-    
+                    <li><router-link to="/projects" >Projects</router-link></li>
+      				<li><router-link to="/blog" >Blog</router-link></li>
+    				<li><router-link to="/courses" >Courses</router-link></li>
+
 										<li><a href="index.html">Homepage</a></li>
 										<li><a href="generic.html">Generic</a></li>
 										<li><a href="elements.html">Elements</a></li>

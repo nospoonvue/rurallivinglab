@@ -1,7 +1,7 @@
 <template>
  <div id="blog">
     
-    <Status v-bind:class="statuscss" v-bind:img="status"/>
+    <Status class="StatusShow" v-bind:img="status" v-show="loading" />
 
     <section id="banner" class="banner" v-for="item in info" :key="item.fields.Title">
         <div class="content" >
@@ -20,7 +20,7 @@
         </span>
     </section>
     <section class="banner">
-    <div id="pages" style="text-align:center">
+    <div id="pages" style="text-align:center" v-show="ready">
         <p><button  :disabled='backDisabled' v-on:click="backward">previous page</button> | <button  :disabled='forwardDisabled' v-on:click="forward">next page</button></p>
     </div>
     </section>
@@ -36,22 +36,17 @@
 import axios from 'axios';
 import Status from '@/components/Status.vue'
 
-var baseUrl = `https://script.google.com/macros/s/AKfycbxdxAaP33kUP1kO0J4TOHKdz6FMoiIVPCqQvrGaoNfrWbAeJiY/exec`;
-
-
 async function getData(viewStatus)
 {
 
-    viewStatus.statuscss = "StatusShow";
-// 'Content-Type': 'application/x-www-form-urlencoded'
-   const config = 
-   {
-    headers: 
+    const config = 
     {
-       
-    
+        headers: 
+        {
+        
+        
+        }
     }
-}
 var settings = {
     'table': viewStatus.table,
     'pageSize': viewStatus.pageSize,
@@ -62,34 +57,34 @@ const formData = new FormData();
 formData.append('data', JSON.stringify(settings));
 formData.append('action', 'view');
 
-
-//+ '&pageSize=' + viewStatus.pageSize
-    await axios.post (baseUrl, formData, config)
-            .then(response => 
+viewStatus.loading = true;
+await axios.post (viewStatus.$baseUrl, formData, config)
+        .then(response => 
+        {
+            //alert('hi');
+            viewStatus.info = response.data.records;
+            if(response.data.offset)
             {
-                //alert('hi');
-                viewStatus.info = response.data.records;
-                viewStatus.statuscss = "StatusHidden";
-                if(response.data.offset)
-                {
-                    viewStatus.offset = response.data.offset;
-                   // alert(response.data.offset);
-                }
-                else
-                {
-                    viewStatus.offset = "";
-                    
-                }
+                viewStatus.offset = response.data.offset;
+                viewStatus.ready = true;
+                // alert(response.data.offset);
+            }
+            else
+            {
+                viewStatus.offset = "";
+                
+            }
+            viewStatus.loading = false;
 
-            }).catch
-            (
-                function (error) 
-                {
-                    console.log(error)
-                    //viewStatus.status = error;
-                }
-            )
-            
+        }).catch
+        (
+            function (error) 
+            {
+                console.log(error)
+                //viewStatus.status = error;
+                viewStatus.loading = false;
+            }
+        )
 }
 
 export default 
@@ -101,7 +96,8 @@ export default
     {
     return {
         info: null,
-        statuscss: "StatusHidden",
+        ready: false,
+        loading: false,
         status: "",
         offset: "",
         offsetHistoryCursor: 0,

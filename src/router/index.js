@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Projects from '../views/Projects.vue'
 import Blog from '../views/Blog.vue'
 import Login from '../views/Login.vue'
+import Courses from '../views/Courses.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ Vue.use(VueRouter)
   path: '/login',
   name: 'Login',
   component: Login
+  },
+  {
+  path: '/courses',
+  name: 'Courses',
+  component: Courses
   }
 
 ]

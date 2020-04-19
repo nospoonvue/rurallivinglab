@@ -8,6 +8,7 @@
             <p><input type="text" name="loggedInName" id="loggedInName" value="" placeholder="First name" autocomplete="off"  v-model="user.Name"></p>
             <p><input type="text" name="loggedInLastName" id="loggedInLastName" value="" placeholder="Last name" v-model="user.LastName"></p>
             <p><input type="email" name="Email" id="emailProfile" value="" placeholder="E-mail" v-model="user.Email"></p>
+            <p><input type="url" name="AvatarUrl" id="avatarUrl" value="" placeholder="Url" v-model="user.AvatarUrl"></p>
             <ul class="actions">
                 <li><a href="#" class="button primary" v-on:click="updateProfile()">Update</a></li>
                 <li><a href="#" class="button" v-on:click="logOut()">Log out</a></li>
@@ -43,7 +44,7 @@
         </div>
 
         <span class="image object">
-         
+            <img v-bind:src="user.AvatarUrl" v-bind:alt="user.Name" />
         </span>
     </section>
  <Status v-bind:class="statuscss" v-bind:img="status"/>
@@ -59,10 +60,6 @@
 <script>
 import axios from 'axios';
 import Status from '@/components/Status.vue'
-
-var baseUrl = `https://script.google.com/macros/s/AKfycbxdxAaP33kUP1kO0J4TOHKdz6FMoiIVPCqQvrGaoNfrWbAeJiY/exec`;
-
-
 
 async function getData(viewStatus,action)
 {
@@ -82,7 +79,7 @@ async function getData(viewStatus,action)
 
     alert("action:"+action+":userin:"+JSON.stringify(viewStatus.user));
 
-    await axios.post (baseUrl, formData, config)
+    await axios.post (viewStatus.$baseUrl, formData, config)
             .then(response => 
             {
                 alert(baseUrl);

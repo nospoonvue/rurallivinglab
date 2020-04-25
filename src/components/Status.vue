@@ -1,6 +1,6 @@
 <template>
   <div class="status">
-    <div id="statuslog" v-bind:class="statuscss" ><img id="statusimage" v-bind:src="status" /> </div>
+    <div id="statuslog" class="statusCenter" ><img id="statusimage" v-bind:src="status" /> </div>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: 'Status',
   props: {
-    status: { default: "./images/loading.gif", type: String  },
+    status: { default: "./images/ajax-loader.gif", type: String  },
     statuscss: String
   }
 }
@@ -16,6 +16,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.statusCenter
+{
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
 .StatusHidden {
   margin: auto;
   position: absolute;

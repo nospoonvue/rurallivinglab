@@ -19,7 +19,8 @@
             <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="item.fields.Title" />
         </span>
     </section>
-    <section class="banner">
+    <section class="">
+
     <div id="pages" style="text-align:center" v-show="ready">
         <p><button  :disabled='backDisabled' v-on:click="backward">previous page</button> | <button  :disabled='forwardDisabled' v-on:click="forward">next page</button></p>
     </div>

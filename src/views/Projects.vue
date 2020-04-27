@@ -1,5 +1,6 @@
 <template>
   <div class="projects">
+	  
 							<!-- Banner -->
 								<section id="banner">
 									<div class="content">

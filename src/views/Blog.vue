@@ -103,7 +103,7 @@ export default
         status: "",
         offset: "",
         offsetHistoryCursor: 0,
-        pageSize: 2,
+        pageSize: 10,
         offsetHistory: [],  
         table: "Blog"
         }

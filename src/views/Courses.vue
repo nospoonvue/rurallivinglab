@@ -14,7 +14,7 @@
                 <li><a href="#" class="button big">Learn More</a></li>
             </ul>
         </div>
-        <span class="image object">
+        <span class="image object" style="width:450px">
              <!--
             <Agile :nav-buttons="false" style="width:200px;">
                   <div class="slide">
@@ -24,7 +24,7 @@
     
          <img v-bind:src="item.fields.Visuals[0].url" v-bind:alt="item.fields.Title" />
           -->
-        <Agile :slidesToShow="1" :dots="true" :navButtons="false" :key="item.fields.Visuals.length" style="width:450px">
+        <Agile :slidesToShow="1" :dots="true" :navButtons="false" :key="item.fields.Visuals.length" style="width:450px;height:inherit">
             <div class="" v-for="item in item.fields.Visuals" :key="item.Title" >
                 <img v-bind:src="item.url" v-bind:alt="item.Title" />
             </div>

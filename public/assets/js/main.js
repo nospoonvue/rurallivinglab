@@ -99,6 +99,7 @@
 
 					// Toggle.
 						$sidebar.toggleClass('inactive');
+				
 
 				});
 

@@ -7,10 +7,10 @@
         <div class="content" >
             <header>
                 <h1>{{ item.fields.Title }}</h1>
-                <p>{{ item.fields.Subtitle }}</p>
+                <p><vue-markdown>{{ item.fields.Subtitle }}</vue-markdown></p>
                 <h5>{{ item.fields.PublishDate }} </h5>
             </header>
-            <p>{{ item.fields.Article }}</p>
+            <p><vue-markdown>{{ item.fields.Article }}</vue-markdown></p>
             <ul class="actions">
                 <li><a href="#" class="button big">Learn More</a></li>
             </ul>
@@ -36,6 +36,7 @@
 <script>
 import axios from 'axios';
 import Status from '@/components/Status.vue'
+import VueMarkdown from 'vue-markdown'
 
 async function getData(viewStatus)
 {
@@ -91,7 +92,7 @@ await axios.post (viewStatus.$baseUrl, formData, config)
 export default 
 {
     name: "projects",
-    components: {Status},
+    components: {Status, VueMarkdown},
 
     data() 
     {

@@ -32,7 +32,7 @@ function sideBar()
 				.appendTo($head);
 
 	// Toggle.
-		$('<a href="#sidebar" class="toggle">Toggle</a>')
+		$('<a href="#sidebar" class="toggle" style-"z-index:99999">Toggle</a>')
 			.appendTo($sidebar)
 			.on('click', function(event) {
 
@@ -42,7 +42,7 @@ function sideBar()
 
 				// Toggle.
 					$sidebar.toggleClass('inactive');
-
+					//alert('ho');
 			});
 				// Events.
 	var $sidebar = $('#sidebar'),
@@ -192,7 +192,8 @@ function sideBar()
 			// Toggle.
 				$menu_openers.not($this).removeClass('active');
 				$this.toggleClass('active');
-
+				
+alert('hi');
 			// Trigger resize (sidebar lock).
 				$window.triggerHandler('resize.sidebar-lock');
 

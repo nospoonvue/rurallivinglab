@@ -8,17 +8,31 @@
             <header>
                 <h2>{{ item.fields.Title }}</h2>
             </header>
-                <p>{{ item.fields.ShortDescription }}</p>
+                <p><vue-markdown>{{ item.fields.ShortDescription }}</vue-markdown></p>
                 <h5>ECTS: {{ item.fields.ECTS }} </h5>         
             <ul class="actions">
                 <li><a href="#" class="button big">Learn More</a></li>
             </ul>
         </div>
         <span class="image object">
-            <img v-bind:src="item.fields.Visuals[0].url" v-bind:alt="item.fields.Title" />
+             <!--
+            <Agile :nav-buttons="false" style="width:200px;">
+                  <div class="slide">
+            <h3>slide 1</h3>
+        </div>
+            </Agile>
+    
+         <img v-bind:src="item.fields.Visuals[0].url" v-bind:alt="item.fields.Title" />
+          -->
+        <Agile :slidesToShow="1" :dots="true" :navButtons="false" :key="item.fields.Visuals.length" style="width:450px">
+            <div class="" v-for="item in item.fields.Visuals" :key="item.Title" >
+                <img v-bind:src="item.url" v-bind:alt="item.Title" />
+            </div>
+        </Agile>
+     
         </span>
     </section>
-    <section class="banner">
+    <section class="">
     <div id="pages" style="text-align:center" v-show="ready">
         <p><button  :disabled='backDisabled' v-on:click="backward">previous page</button> | <button  :disabled='forwardDisabled' v-on:click="forward">next page</button></p>
     </div>
@@ -28,12 +42,39 @@
 
 
 <style >
+.agile__nav-button:hover {
+  color: #ff0000;
+}
+.agile__dot {
+  margin: 10px 10px;
+}
+.agile__dot button {
+  background-color: #eee;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  height: 10px;
+  font-size: 0;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+  width: 10px;
+}
+.agile__dot--current button, .agile__dot:hover button {
+  background-color: #ff0000;
+}
+
 
 </style>
 
 <script>
 import axios from 'axios';
 import Status from '@/components/Status.vue'
+import VueMarkdown from 'vue-markdown'
+import { VueAgile } from 'vue-agile'
 
 async function getData(viewStatus)
 {
@@ -89,7 +130,7 @@ await axios.post (viewStatus.$baseUrl, formData, config)
 export default 
 {
     name: "courses",
-    components: {Status},
+    components: {Status, VueMarkdown,Agile: VueAgile },
 
     data() 
     {
@@ -102,7 +143,8 @@ export default
         offsetHistoryCursor: 0,
         pageSize: 2,
         offsetHistory: [],  
-        table: "Course"
+        table: "Course",
+        klaar:false
         }
     },
     methods:
@@ -138,9 +180,13 @@ export default
     {
         this.offsetHistory[0]="";
         getData(this);
+       
     },
+    mounted()
+    {
+         this.klaar=true;
+    }
 }
-
 
 </script>
 

@@ -20,7 +20,7 @@
 									</ul>
 								</header>
 
-              <router-view/>
+              					<router-view/>
 
 								<footer id="footer" style="text-align:center">
 									<p class="copyright">&copy; Purposeful learning labs.</p>
@@ -29,6 +29,7 @@
 					</div>
 
 				<!-- Sidebar -->
+				<section>
 					<div id="sidebar">
 						<div class="inner">
 
@@ -40,18 +41,18 @@
 								</section>
 
 							<!-- Menu -->
-              <div id="nav">
+              				<div id="nav">
 								<nav id="menu">
 									<header class="major">
 										<h2>Menu</h2>
 									</header>
 									<ul>
                         
-                    <li><router-link to="/">Home</router-link></li>
-                    <li><router-link to="/about">About</router-link></li>
-                    <li><router-link to="/projects" >Projects</router-link></li>
-      				<li><router-link to="/blog" >Blog</router-link></li>
-    				<li><router-link to="/courses" >Courses</router-link></li>
+										<li><router-link to="/">Home</router-link></li>
+										<li><router-link to="/about">About</router-link></li>
+										<li><router-link to="/projects" >Projects</router-link></li>
+										<li><router-link to="/blog" >Blog</router-link></li>
+										<li><router-link to="/courses" >Courses</router-link></li>
 
 										<li><a href="index.html">Homepage</a></li>
 										<li><a href="generic.html">Generic</a></li>
@@ -81,8 +82,11 @@
 										<li><a href="#">Amet Lacinia</a></li>
 									</ul>
 								</nav>
-                </div>
-							<!-- Section -->
+              				</div>
+						</div>
+                	</div>
+					</section>
+							<!-- Section 
 								<section>
 									<header class="major">
 										<h2>Ante interdum</h2>
@@ -105,8 +109,8 @@
 										<li><a href="#" class="button">More</a></li>
 									</ul>
 								</section>
-
-							<!-- Section -->
+							-->
+							<!-- Section 
 								<section>
 									<header class="major">
 										<h2>Get in touch</h2>
@@ -119,24 +123,24 @@
 										Nashville, TN 00000-0000</li>
 									</ul>
 								</section>
-
-							<!-- Footer -->
-								<footer id="footer">
+							-->
+							<!-- Footer 								<footer id="footer">
 									<p class="copyright">&copy; Purposeful learning labs. All rights reserved.</p>
 								</footer>
+-->
 
 						</div>
             							<!-- Footer -->
 
 					</div>
-    </div>
-    </div>
+
 </template>
 
 <script>
 //import something from "./assets/js/something.js"
 //import "./assets/js/jquery.min.js"
 import sideBar from "./assets/js/main.js"
+import "./assets/css/main.css"
 //import AccountInfo from "@/components/AccountInfo.vue";
 
 export default {

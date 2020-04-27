@@ -243,11 +243,9 @@ export default
      	if(localStorage.user)
         {
             this.user = JSON.parse(localStorage.user);
-
-            if(this.user.Name)
-            {
-                document.getElementById('un').innerHTML = this.user.Name;
-            }
+            
+            if(this.user.AvatarUrl && this.user.AvatarUrl.length >5) this.localAvatarUrl = this.user.AvatarUrl;
+            if(this.user.Name) document.getElementById('un').innerHTML = this.user.Name;
         }
   
     }

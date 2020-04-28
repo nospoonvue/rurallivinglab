@@ -5,6 +5,7 @@ import Projects from '../views/Projects.vue'
 import Blog from '../views/Blog.vue'
 import Login from '../views/Login.vue'
 import Courses from '../views/Courses.vue'
+import Course from '../views/Course.vue'
 
 Vue.use(VueRouter)
 
@@ -41,12 +42,18 @@ Vue.use(VueRouter)
   path: '/courses',
   name: 'Courses',
   component: Courses
+  },
+  {
+  path: '/course/:name',
+  name: 'Course',
+  props: true,
+  component: Course
   }
-
 ]
 
 const router = new VueRouter({
+
   routes
 })
-
+//  mode: "history",
 export default router

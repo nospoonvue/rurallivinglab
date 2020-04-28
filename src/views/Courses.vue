@@ -11,21 +11,16 @@
                 <p><vue-markdown>{{ item.fields.ShortDescription }}</vue-markdown></p>
                 <h5>ECTS: {{ item.fields.ECTS }} </h5>         
             <ul class="actions">
-                <li><a href="#" class="button big">Learn More</a></li>
+                <li><router-link :to="'/course/'+item.fields.LinkName" class="button big">Learn More</router-link></li>
+   
             </ul>
         </div>
         <span class="image object" style="width:450px">
-             <!--
-            <Agile :nav-buttons="false" style="width:200px;">
-                  <div class="slide">
-            <h3>slide 1</h3>
-        </div>
-            </Agile>
-    
-         <img v-bind:src="item.fields.Visuals[0].url" v-bind:alt="item.fields.Title" />
-          -->
-        <Agile :slidesToShow="1" :dots="true" :navButtons="false" :key="item.fields.Visuals.length" style="width:450px;height:inherit">
-            <div class="" v-for="item in item.fields.Visuals" :key="item.Title" >
+
+        <Agile :slidesToShow="1" :dots="true" :navButtons="false" :key="item.fields.Visuals.length" style="height:inherit">
+
+
+            <div class="" v-for="item in  filterImages(item.fields.Visuals)" :key="item.url"  >
                 <img v-bind:src="item.url" v-bind:alt="item.Title" />
             </div>
         </Agile>
@@ -91,7 +86,7 @@ var settings = {
     'table': viewStatus.table,
     'pageSize': viewStatus.pageSize,
     'offset': viewStatus.offset,
-    'fields': ['Title','ShortDescription', 'Visuals','ECTS']
+    'fields': ['Title','ShortDescription', 'Visuals','ECTS','LinkName']
 }
 //alert(JSON.stringify(settings));
 const formData = new FormData();
@@ -162,6 +157,11 @@ export default
             if(this.offsetHistoryCursor < 0) this.offsetHistoryCursor =0;
             this.offset = this.offsetHistory[this.offsetHistoryCursor];
             getData(this);
+        },
+        filterImages: function (visuals) {
+            return visuals.filter(function (image) {
+            return  image.url.includes("736x512");  
+            })
         }
     },
     computed: {
@@ -174,7 +174,8 @@ export default
         forwardDisabled: function(){
            // if(this.offset)
     	    return  (this.offsetHistoryCursor >0 || this.offsetHistoryCursor ==0) && this.offset == "";
-        }  
+        }
+
   },
     created() 
     {

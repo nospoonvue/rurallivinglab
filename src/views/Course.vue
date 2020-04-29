@@ -7,30 +7,29 @@
             <div class="" v-for="item in filterImages" :key="item.Title" >
                 <img v-bind:src="item.url" v-bind:alt="item.Title" />
             </div>
-            <h1>  {{course.Title}}</h1>
+            
         </span>
+        <h1>{{course.Title}}</h1>
+        <blockquote>{{course.ShortDescription}}</blockquote>
 
-        <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-        <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
-
+        <h3>Description</h3>
+        <p>{{course.FullDescription}}<p/>
         <hr class="major" />
 
-        <h2>Interdum sed dapibus</h2>
-        <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+        <h2>Sections</h2>
+            <div class="" v-for="section in sections" :key="section.fields.Title" >
+                <h3>{{section.fields.Order}}. {{section.fields.Title}}</h3>
+                <div v-if="track || !user ">
+                <div  class="" v-for="subject in filteredSubjects(section)" :key="subject.fields.Title"  >
+                    <input type="radio" :id="subject.id" :name="subject.id" :checked="getStudentTrack(subject)" >
+                    <label :for="subject.id">{{subject.fields.Title}}</label>
+                
+                </div>
+                </div>
+            </div>
 
-        <hr class="major" />
 
-        <h2>Magna etiam veroeros</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-        <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
-
-        <hr class="major" />
-
-        <h2>Lorem aliquam bibendum</h2>
-        <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
+  
 
          </section>
  
@@ -51,6 +50,9 @@ import Status from '@/components/Status.vue'
 import VueMarkdown from 'vue-markdown'
 import { VueAgile } from 'vue-agile'
 
+//default
+var settings = {};
+
 async function getData(viewStatus)
 {
         const config = 
@@ -62,13 +64,7 @@ async function getData(viewStatus)
         }
     }
 
-var settings = {
-    'table': viewStatus.table,
-    'pageSize': viewStatus.pageSize,
-    'offset': viewStatus.offset,
-    'fields': ['Title','ShortDescription', 'Visuals','ECTS'],
-    'filter': '{LinkName}="'+ viewStatus.name + '"'
-}
+
 //alert(JSON.stringify(settings));
 const formData = new FormData();
 formData.append('data', JSON.stringify(settings));
@@ -78,12 +74,86 @@ viewStatus.loading = true;
 await axios.post (viewStatus.$baseUrl, formData, config)
         .then(response => 
         {
-            //viewStatus.data = response.data.records;
-            alert(JSON.stringify(response.data.records[0].fields));
-
-            viewStatus.course = response.data.records[0].fields;
             
+            //alert(JSON.stringify(response.data.records[0]));
+           
+          //  alert(settings.bind);
+            switch (settings.bind) 
+            {
+                case 'course':
+                   // alert(response.data.records[0].id);
+                    // set course
+                    viewStatus.recordId = response.data.records[0].id;
+                    viewStatus.course = response.data.records[0].fields;
+                    viewStatus.courseName = response.data.records[0].fields.Title;
+                    // get Subjects
+                    settings = 
+                    {
+                    'table': 'Section',
+                    'view': 'Main',
+                    'fields': ['Title', 'Order', 'Description', 'Visuals'],
+                    'filter': '{Course}="'+ viewStatus.courseName + '"',
+                    'bind': 'section'
+                    };
+                    getData(viewStatus);
+                    
+                    break;
+
+                case 'section':
+                  //  alert("sections:"+JSON.stringify(response));
+                    viewStatus.sections = response.data.records;
+                    // get sections
+                    settings = 
+                    {
+                    'table': 'Subject',
+                    'view': 'Main',
+                    'fields': ['Title','Description', 'Visuals', 'Section'],
+                    'filter': '{Course}="'+ viewStatus.courseName + '"',
+                    'bind': 'subject'
+                    };
+                    getData(viewStatus);
+                    // get subjects
+                    break;
+
+                case 'subject':
+                  //  alert("subjects:"+JSON.stringify(response));
+                    viewStatus.subjects = response.data.records;
+                    if(!viewStatus.user)
+                    {
+                        break;
+                    }
+
+                    settings = 
+                    {
+                    'table': 'StudentTrack',
+                    'view': 'Main',
+                    'fields': ['Subjects'],
+                    'filter': '{Token}="'+ viewStatus.user.Token + '"',
+                    'bind': 'studentTrack'
+                    };
+                    
+                    getData(viewStatus);
+                    break;
+
+                case 'studentTrack':
+                    //alert("studentTrackkkk:"+JSON.stringify(response));
+                    viewStatus.track = response.data.records[0];
+                    break;
+
+                default:
+                    break;
+
+            }
+
+
+            
+  
             viewStatus.loading = false;
+    
+            
+           // alert(config.bind.Title)
+           // objectToLoad = JSON.parse(response.data.records[0].fields);
+           
 
         }).catch
         (
@@ -105,12 +175,19 @@ export default
     data() 
     {
     return {
+        user: null,
+        objectToLoad: {},
+        recordId: "",
         data: null,
         ready: false,
         loading: false,
         status: "",
         table: "Course",
-        course: {}
+        course: {},
+        subjects: null,
+        sections: {},
+        courseName: "",
+        track: null
         }
     },
     props: 
@@ -123,24 +200,81 @@ export default
     },
     methods:
     {
+        /*
+        filterImages: function (visuals) {
+            return visuals.filter(function (image) {
+            return  image.url.includes("736x512");  
+            })
+        },
+        */
+       getStudentTrack: function (compareSubject)
+       {
+          //alert(JSON.stringify(this.track));
+           if(!this.track ) return false; 
 
+
+           if (this.track.fields.Subjects.filter(function (subject)
+           {
+               if(subject == compareSubject.id)
+                    return true;
+                else
+                    return false; 
+           }).length>0) return true
+           else
+           return false;
+
+
+           
+       },
+        filteredSubjects: function (section) {
+            //alert("filterding: " + JSON.stringify(this.subjects) + " ---- " + " ---- " + section.id);
+            if(!this.subjects || this.subjects.length == 0)return false;
+            return this.subjects.filter(function (subject) {
+            return subject.fields.Section == section.id;
+            })
+        }
     },
     computed: 
     {
-        filterImages: function () {
-            return this.course.Visuals.filter(function (image) {
-            return  image.url.includes("1280x416");  
-            })
+        filterImages: function () 
+        {
+           // alert(this.course.Visuals);
+           if(this.course.Visuals)
+           {
+            return this.course.Visuals.filter(function (image) 
+                {
+                    return  image.url.includes("1280x416");  
+                })
+           }
+           else
+           {
+               return null;
+           }
         }
     },
     created() 
     {
-     getData(this);
- 
+        if(localStorage && localStorage.user)
+        {
+            this.user = JSON.parse(localStorage.user);
+        }
+
+        settings = 
+        {
+        'table': this.table,
+        'pageSize': 50,
+        'fields': ['Title','ShortDescription', 'FullDescription', 'Visuals','ECTS'],
+        'filter': '{LinkName}="'+ this.name + '"',
+        'bind': 'course'
+        };
+        //objectToLoad = this.course;
+        //this.objectToLoad =  this.course;
+        getData(this);
     },
     mounted()
     {
        // alert(this.name);
+   
     }
 }
 

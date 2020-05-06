@@ -990,12 +990,13 @@ section.special, article.special {
   text-align: center; }
 
 header p {
-  font-family: "Roboto Slab", serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 1em;
   font-weight: 400;
   letter-spacing: 0.075em;
   margin-top: -0.5em;
-  text-transform: uppercase; }
+ 
+   }
 
 header.major > :last-child {
   border-bottom: solid 3px #f56a6a;
@@ -1930,7 +1931,9 @@ button,
   transition: margin-left 0.5s ease, box-shadow 0.5s ease;
   background-color: #f5f6f7;
   font-size: 0.9em;
-  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   width: 26em; }
   #sidebar h2 {
     font-size: 1.38889em; }
@@ -1955,6 +1958,7 @@ button,
       padding: 2.22222em;
       width: calc(100% + 4.44444em); }
   #sidebar .toggle {
+    
     text-decoration: none;
     -moz-transition: left 0.5s ease;
     -webkit-transition: left 0.5s ease;
@@ -1968,6 +1972,7 @@ button,
     line-height: 7.5em;
     outline: 0;
     overflow: hidden;
+
     position: absolute;
     text-align: center;
     text-indent: -15em;
@@ -2110,7 +2115,7 @@ button,
 
 /* Banner */
 .banner {
-  padding: 3em 0 2em 0 ;
+  padding: 4em 0 2em 0 ;
   display: -moz-flex;
   display: -webkit-flex;
   display: -ms-flex;

@@ -110,12 +110,12 @@ async function getData(viewStatus,action)
                 }
                 //multiple record return
                 var userFound = false;
-                if(action == "login" && response.data.records[0])
+                if(action == "read" && response.data.records[0])
                 {
                     viewStatus.user = response.data.records[0].fields;
                     userFound = true;
                 }
-                if(action == "login" && !userFound)
+                if(action == "read" && !userFound)
                 {
                     //login failed
                     viewStatus.errors.push("Login failed");
@@ -185,7 +185,7 @@ export default
     {
         getLogin: function()
         {
-            getData(this, 'login');
+            getData(this, 'read');
         },
         logOut: function()
         {

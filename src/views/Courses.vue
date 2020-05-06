@@ -84,6 +84,7 @@ async function getData(viewStatus)
     }
 var settings = {
     'table': viewStatus.table,
+    'view': viewStatus.view,
     'pageSize': viewStatus.pageSize,
     'offset': viewStatus.offset,
     'fields': ['Title','ShortDescription', 'Visuals','ECTS','LinkName']
@@ -139,6 +140,7 @@ export default
         pageSize: 2,
         offsetHistory: [],  
         table: "Course",
+        view: "Main",
         klaar:false
         }
     },

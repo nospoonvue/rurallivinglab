@@ -3,7 +3,7 @@
     
     <Status class="StatusShow" v-bind:img="status" v-show="loading" />
 
-    <section id="banner" class="banner" v-for="item in info" :key="item.fields.Title">
+    <section id="banner" class="banner" v-for="item in info" :key="item.id">
         <div class="content" >
             <header>
                 <h1>{{ item.fields.Title }}</h1>
@@ -51,6 +51,7 @@ async function getData(viewStatus)
     }
 var settings = {
     'table': viewStatus.table,
+    'view': viewStatus.view,
     'pageSize': viewStatus.pageSize,
     'offset': viewStatus.offset
 }
@@ -105,7 +106,8 @@ export default
         offsetHistoryCursor: 0,
         pageSize: 10,
         offsetHistory: [],  
-        table: "Blog"
+        table: "Blog",
+        view: "Public"
         }
     },
     methods:

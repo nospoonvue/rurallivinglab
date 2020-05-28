@@ -90,13 +90,13 @@ async function getData(viewStatus)
 //alert(JSON.stringify(settings));
 const formData = new FormData();
 formData.append('data', JSON.stringify(settings));
-formData.append('action', 'view');
+//formData.append('action', 'view');
 
 viewStatus.loading = true;
 await axios.post (viewStatus.$baseUrl, formData, config)
         .then(response => 
         {            
-            //alert(JSON.stringify(response.data.records[0]));           
+           // alert(JSON.stringify(response.data.records[0]));           
             //alert(settings.bind);
             switch (settings.bind) 
             {
@@ -110,10 +110,11 @@ await axios.post (viewStatus.$baseUrl, formData, config)
                     settings = 
                     {
                     'table': 'Section',
+                    'action': 'view',
                     'view': 'Main',
                     'fields': ['Order','Title', 'Description', 'Order', 'Description', 'Visuals', 'NumberOfSubjects','NumberOfSubjectsFinished'],
                     'filter': '{Course}="'+ viewStatus.courseName + '"',
-                    'bind': 'section'
+                    'bind': 'section' //<-next step
                     };
                     getData(viewStatus);
                     
@@ -128,9 +129,10 @@ await axios.post (viewStatus.$baseUrl, formData, config)
                     {
                     'table': 'Subject',
                     'view': 'Main',
+                    'action': 'view',
                     'fields': ['Order','Title','Description', 'Visuals', 'Section'],
                     'filter': '{Course}="'+ viewStatus.courseName + '"',
-                    'bind': 'subject'
+                    'bind': 'subject' //<-next step
                     };
                     getData(viewStatus);
                     // get subjects
@@ -148,15 +150,19 @@ await axios.post (viewStatus.$baseUrl, formData, config)
                     {
                     'table': 'StudentTrack',
                     'view': 'Main',
+                    'action': 'view',
                     'fields': ['Subjects'],
                     'filter': '{Token}="'+ viewStatus.user.Token + '"',
-                    'bind': 'studentTrack'
+                    'bind': 'studentTrack' //<-next step
                     };
                     
                     getData(viewStatus);
                     break;
 
                 case 'studentTrack':
+                 
+                   // if(! response.data.records[0] || !response.data.records[0].fields.Subjects)return;
+                  //     alert(JSON.stringify(response.data.records[0]));
                     viewStatus.track = response.data.records[0];
                     
                     //how much finished sofar?
@@ -174,7 +180,8 @@ await axios.post (viewStatus.$baseUrl, formData, config)
                     }
                     break;
                 case 'trackUpdate':
-                    
+                    //new subject finished
+                    //alert('done trackupdate');
 
                     break;
                 default:
@@ -248,7 +255,12 @@ export default
           //alert(JSON.stringify(this.track));
            if(!this.track ) return false; 
 
-
+            //look if subject is allready tracked or not
+           if(!this.track.fields.Subjects)
+           {
+               this.track.fields.Subjects = [];
+               return false;
+           }
            if (this.track.fields.Subjects.filter(function (subject)
            {
                if(subject == compareSubject.id)
@@ -257,17 +269,16 @@ export default
                     return false; 
            }).length>0) return true
            else
-           return false;
-
-
-           
+           {
+            return false;
+           }
        },
         filteredSubjects: function (section) {
             //alert("filterding: " + JSON.stringify(this.subjects) + " ---- " + " ---- " + section.id);
             if(!this.subjects || this.subjects.length == 0)return false;
             return this.subjects.filter(function (subject) {
-            return subject.fields.Section == section.id;
-            })
+                return subject.fields.Section == section.id;
+                })
         },
         toggleSection: function (section){
             document.getElementById('sidebar').className = "inactive";
@@ -284,8 +295,7 @@ export default
                     document.getElementById(this.selectedSection.id).style.display = "none";
                     document.getElementById('arrow'+this.selectedSection.id).className = "fa fa-angle-double-down";
                 }
-                this.selectedSection = section;
-                
+                this.selectedSection = section;                
             }   
             else
             {
@@ -296,22 +306,46 @@ export default
         },
         nextSubject: function (selectedSubject, finishIt){
             {
-                /*
-                if(finishIt)
-                {
-                    //add subject to StudentTrack
-                    settings = 
-                    {
-                    'table': 'StudentTrack',
-                    'fields': ['Title','ShortDescription', 'FullDescription', 'Visuals','ECTS'],
-                    'filter': '{LinkName}="'+ this.name + '"',
-                    'bind': 'course'
-                    };                    
-                     getData(this);
-                }
-                */
+                                
+                //open new subject
                 for (let thisSubject of this.subjects) 
                 {
+                     if(thisSubject.fields.Order === this.selectedSubject.fields.Order && finishIt)
+                     {
+                         //set as done
+                        // alert(thisSubject.id);
+                         document.getElementById(thisSubject.id).checked = true; 
+                        if(finishIt)
+                        {
+                            //alert(JSON.stringify(this.track.fields.Subjects));
+                            this.track.fields.Subjects.push(thisSubject.id);
+                            /*
+    
+                            */
+                            //add subject to StudentTrack
+                            settings = 
+                            {
+                            'table': 'StudentTrack',
+                            'action': 'PATCH',              
+                            'object': this.track,
+                            'token': this.user.Token,
+                            'bind': 'trackUpdate' //<-next step
+                            };
+                            //alert(JSON.stringify(settings));
+                            //console.log(JSON.stringify(settings));
+                            getData(this);
+
+                            for(let thisSection of this.sections)
+                            {
+                               // alert(thisSection.id + "-" +JSON.stringify(thisSubject));
+                               if(thisSection.id == thisSubject.fields.Section[0]) 
+                               {
+                                   thisSection.fields.NumberOfSubjectsFinished++;
+                               }
+                            }
+                        }                         
+                     }
+                   
                     if(thisSubject.fields.Order === (this.selectedSubject.fields.Order+1))
                     {
                          this.selectedSubject = thisSubject; 
@@ -321,14 +355,13 @@ export default
 
                 if(this.selectedSubject.fields.Section != this.selectedSection.id)
                 {
-                    document.getElementById(this.selectedSection.id).style.display = "none";
+                    document.getElementById(this.selectedSection.id).style.display = "none"; 
                     document.getElementById('arrow'+this.selectedSection.id).className = "fa fa-angle-double-down";         
 
                     for (let thisSection of this.sections) 
                     {
                         if(thisSection.id == this.selectedSubject.fields.Section)
-                        {
-                            
+                        {                            
                             this.selectedSection = thisSection;
                             document.getElementById(this.selectedSection.id).style.display = "block";
                             document.getElementById('arrow'+this.selectedSection.id).className = "fa fa-angle-double-up";                                 
@@ -367,6 +400,7 @@ export default
         {
         'table': this.table,
         'pageSize': 50,
+        'action':'view',
         'fields': ['Title','ShortDescription', 'FullDescription', 'Visuals','ECTS'],
         'filter': '{LinkName}="'+ this.name + '"',
         'bind': 'course'

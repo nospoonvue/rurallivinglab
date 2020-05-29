@@ -162,9 +162,9 @@ await axios.post (viewStatus.$baseUrl, formData, config)
                 case 'studentTrack':
                  
                    // if(! response.data.records[0] || !response.data.records[0].fields.Subjects)return;
-                  //     alert(JSON.stringify(response.data.records[0]));
+                     //  alert(JSON.stringify(response.data.records[0]));
                     viewStatus.track = response.data.records[0];
-                    
+                    if(!viewStatus.track.fields.Subjects)viewStatus.track.fields.Subjects = [];
                     //how much finished sofar?
                     for(let x=0; x<viewStatus.subjects.length;x++)
                     {
@@ -314,9 +314,10 @@ export default
                      {
                          //set as done
                         // alert(thisSubject.id);
-                         document.getElementById(thisSubject.id).checked = true; 
-                        if(finishIt)
+                          
+                        if(finishIt && !document.getElementById(thisSubject.id).checked)
                         {
+                            document.getElementById(thisSubject.id).checked = true;
                             //alert(JSON.stringify(this.track.fields.Subjects));
                             this.track.fields.Subjects.push(thisSubject.id);
                             /*

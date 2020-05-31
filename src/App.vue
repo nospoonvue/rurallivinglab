@@ -39,6 +39,9 @@
 										<input type="text" name="query" id="query" placeholder="Search" />
 									</form>
 								</section>
+							<div id="cMenu" style="display:none;">
+
+							</div>
 
 							<!-- Menu -->
               				<div id="nav">
@@ -138,6 +141,9 @@
 //import "./assets/js/jquery.min.js"
 import sideBar from "./assets/js/main.js"
 import "./assets/css/main.css"
+//import "./assets/css/sss.css"
+
+
 //import AccountInfo from "@/components/AccountInfo.vue";
 
 export default {
@@ -155,6 +161,7 @@ export default {
     
     //alert('hier');
 	sideBar();
+	
 
   },
  components: {

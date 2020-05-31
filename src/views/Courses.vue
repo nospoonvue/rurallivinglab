@@ -3,9 +3,15 @@
     
     <Status class="StatusShow" v-bind:img="status" v-show="loading" />
 
-    <section id="banner" class="banner" v-for="item in data" :key="item.fields.Title">
+    <section id="" class="post" v-for="item in data" :key="item.fields.Title">
+        <br/>
         <div class="content" >
             <header>
+                <Agile :slidesToShow="1" :dots="true" :navButtons="false" :key="item.fields.Visuals.length" :centerMode="true">
+                    <div class="slide" v-for="item in  filterImages(item.fields.Visuals)" :key="item.url"  >
+                        <img v-bind:src="item.url" v-bind:alt="item.Title" style="width:100%" />
+                    </div>
+                </Agile>
                 <h2>{{ item.fields.Title }}</h2>
             </header>
                 <p><vue-markdown>{{ item.fields.ShortDescription }}</vue-markdown></p>
@@ -15,17 +21,7 @@
    
             </ul>
         </div>
-        <span class="image object" style="width:450px">
 
-        <Agile :slidesToShow="1" :dots="true" :navButtons="false" :key="item.fields.Visuals.length" style="height:inherit">
-
-
-            <div class="" v-for="item in  filterImages(item.fields.Visuals)" :key="item.url"  >
-                <img v-bind:src="item.url" v-bind:alt="item.Title" />
-            </div>
-        </Agile>
-     
-        </span>
     </section>
     <section class="">
     <div id="pages" style="text-align:center" v-show="ready">
@@ -37,6 +33,22 @@
 
 
 <style >
+
+.agile{
+    width: 100%;
+    max-width: 800px;   
+    text-align: center;
+	}	
+.slide {
+	align-items: center;
+	color: #fffFFF;
+	display: flex;
+	object-fit: cover;
+    width: 100%;
+    height: 100%;
+	justify-content: center;
+}
+
 .agile__nav-button:hover {
   color: #ff0000;
 }

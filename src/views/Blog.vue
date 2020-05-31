@@ -3,8 +3,14 @@
     
     <Status class="StatusShow" v-bind:img="status" v-show="loading" />
 
-    <section id="banner" class="banner" v-for="item in info" :key="item.id">
+    <section id="" class="post" v-for="item in info" :key="item.id">
+
+
         <div class="content" >
+        <br/>
+        <span class="image object">
+                <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="item.fields.Title" style="width:100%" />
+        </span>
             <header>
                 <h1>{{ item.fields.Title }}</h1>
                 <p><vue-markdown>{{ item.fields.Subtitle }}</vue-markdown></p>
@@ -15,9 +21,7 @@
                 <li><a href="#" class="button big">Learn More</a></li>
             </ul>
         </div>
-        <span class="image object">
-            <img v-bind:src="item.fields.Photos[0].url" v-bind:alt="item.fields.Title" />
-        </span>
+
     </section>
     <section class="">
 
@@ -104,7 +108,7 @@ export default
         status: "",
         offset: "",
         offsetHistoryCursor: 0,
-        pageSize: 10,
+        pageSize: 5,
         offsetHistory: [],  
         table: "Blog",
         view: "Public"

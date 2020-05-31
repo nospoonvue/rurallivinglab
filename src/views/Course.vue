@@ -1,7 +1,8 @@
 <template>
     <div id="course">
         <Status class="StatusShow" v-bind:img="status" v-show="loading" />
-        <section  v-if="!selectedSection && !selectedSubject && showCourseInfo">
+
+    <section  v-if="!selectedSection && !selectedSubject && showCourseInfo">
         
         <span class="image main">
             <div class="" v-for="item in filterImages" :key="item.Title" >
@@ -17,13 +18,20 @@
         <hr class="major" />
     </section>
 
-    <section id="banner" class="banner">
-        <span class="object" style="width:300px;" >
-            <ul style="list-style: none;padding-left: 0.2em;text-align: center;" class="" v-if="!showCourseInfo" v-on:click="showCourseInfo=true;selectedSection = null;selectedSubject=null">
-                <li id="backding"><a href="#" class="button small">Back to course overview</a></li>
+    <section id="" class="banner">
+        <!-- course menu -->
+        <span class="object" style="width:300px;" id="courseMenu">
+
+            <ul class="actions">
+                <li>
+                    <a href="#" class="button small" v-if="!showCourseInfo" v-on:click="showCourseInfo=true;selectedSection = null;selectedSubject=null" >Course overview</a>&nbsp;
+                    <a href="#" class="button small" onClick="$('#cMenu').html(''); $('#cMenu').hide(); $('#menu').show();" >Menu</a>
+                </li>
             </ul>
-            
-            <h2>Sections</h2>
+
+            <header class="major">
+                <h2>Section</h2>
+            </header>
             <div class="" v-for="section in sections" :key="section.fields.Title" >
                 
                 <div v-on:click="toggleSection(section)" style="cursor: pointer;display: inline-block;"> <h3 style="display: inline-block;" ><i  :id="'arrow'+section.id" class="fa fa-angle-double-down"></i> {{section.fields.Order}}. {{section.fields.Title}} ({{section.fields.NumberOfSubjectsFinished}}/{{section.fields.NumberOfSubjects}})</h3></div>
@@ -38,7 +46,7 @@
                 </div>
             </div>
         </span>
-
+         <!-- selected section -->
         <div class="content" v-if="selectedSection && !selectedSubject" >
             <header>
                 <h1>Section: {{ selectedSection.fields.Title }}</h1>
@@ -46,20 +54,21 @@
             </header>
         </div>
 
+         <!-- selected subject -->
         <div class="content" v-if="selectedSubject" >
             <header>
                 <h1>Subject: {{ selectedSubject.fields.Title }}</h1>
-                <p><vue-markdown :source="selectedSubject.fields.Description"></vue-markdown></p>    
-              
+                <p><vue-markdown :source="selectedSubject.fields.Description"></vue-markdown></p>                  
             </header>
 
             <ul class="actions">
                 <li><a href="#" class="button small" v-on:click="nextSubject(selectedSubject,false)" >Next subject</a><a href="#" class="button small" v-on:click="nextSubject(selectedSubject, true)" >Finish subject</a></li>
             </ul>
-        </div>
+        </div>        
+    </section>
+    <section>
 
-
-         </section>
+    </section>
     </div>
 </template>
 
@@ -281,7 +290,7 @@ export default
                 })
         },
         toggleSection: function (section){
-            document.getElementById('sidebar').className = "inactive";
+           // document.getElementById('sidebar').className = "inactive";
             this.showCourseInfo= false;
 
             if(document.getElementById(section.id).style.display == "none")
@@ -413,7 +422,11 @@ export default
     mounted()
     {
        // alert(this.name); 
-   
+    //   $('#cMenu').style.display = 'block';
+   $('#courseMenu').appendTo('#cMenu');
+  $('#cMenu').show();
+  $('#menu').hide();
+   //alert($('.courseMenu'));
     }
 }
 

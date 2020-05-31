@@ -18,7 +18,7 @@
         <hr class="major" />
     </section>
 
-    <section id="" class="banner">
+    <section id="" class="post">
         <!-- course menu -->
         <span class="object" style="width:300px;" id="courseMenu">
 
@@ -49,7 +49,7 @@
          <!-- selected section -->
         <div class="content" v-if="selectedSection && !selectedSubject" >
             <header>
-                <h1>Section: {{ selectedSection.fields.Title }}</h1>
+                <h1>{{ selectedSection.fields.Title }}</h1>
                 <p><vue-markdown :source="selectedSection.fields.Description"></vue-markdown></p>    
             </header>
         </div>
@@ -57,7 +57,7 @@
          <!-- selected subject -->
         <div class="content" v-if="selectedSubject" >
             <header>
-                <h1>Subject: {{ selectedSubject.fields.Title }}</h1>
+                <h1>{{ selectedSubject.fields.Title }}</h1>
                 <p><vue-markdown :source="selectedSubject.fields.Description"></vue-markdown></p>                  
             </header>
 

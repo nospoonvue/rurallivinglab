@@ -4,8 +4,8 @@
 								<section id="banner" class="banner">
 									<div class="content">
 										<header>
-											<h1>Hi, I’m Frank</h1>
-											<p>A free and fully responsive site template</p>
+											<h1>Learning with purpose</h1>
+											<p>What it is all about</p>
 										</header>
 										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
 										<ul class="actions">

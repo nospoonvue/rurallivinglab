@@ -10,13 +10,12 @@
 								<header id="header">
 									<a href="index.html" class="logo"><strong>Purposeful Learning Labs</strong></a>
 									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>		
+										<!-- <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>-->
+										<li><a href="https://www.facebook.com/frank.kroondijk" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="https://www.linkedin.com/in/frankkroondijk/" target="_blank" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://www.instagram.com/frankkroondijk/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<!-- <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>		-->
                    						<li><nav id="nav"><router-link to="/login"><div id="un">{{loginLabel}}</div></router-link></nav></li>
-
 									</ul>
 								</header>
 
@@ -32,13 +31,16 @@
 				<section>
 					<div id="sidebar">
 						<div class="inner">
-
-							<!-- Search -->
+							<div id="logo" style="width:100%;text-align:center">
+							<img src="images/pl-logo.png" style="max-width:100px; ">
+							</div>
+							<!-- Search 
 								<section id="search" class="alt">
 									<form method="post" action="#">
 										<input type="text" name="query" id="query" placeholder="Search" />
 									</form>
 								</section>
+							-->
 							<div id="cMenu" style="display:none;">
 
 							</div>
@@ -56,7 +58,7 @@
 										<li><router-link to="/projects" >Projects</router-link></li>
 										<li><router-link to="/blog" >Blog</router-link></li>
 										<li><router-link to="/courses" >Courses</router-link></li>
-
+										<!--
 										<li><a href="index.html">Homepage</a></li>
 										<li><a href="generic.html">Generic</a></li>
 										<li><a href="elements.html">Elements</a></li>
@@ -80,6 +82,7 @@
 												<li><a href="#">Feugiat Veroeros</a></li>
 											</ul>
 										</li>
+										-->
 									</ul>
 								</nav>
               				</div>

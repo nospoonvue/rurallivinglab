@@ -5,7 +5,7 @@
 									<div class="content">
 										<header>
 											<h1>Learning with purpose</h1>
-											<p>What it is all about</p>
+											<p>What it is all aboutt</p>
 										</header>
 										<p>The purposeful learning model turns things around. It is not the teacher who is leading the learning experience but the the context that does. The educators, together with the whole community, do facilitate the creation of the context.</p>
 										<ul class="actions">
